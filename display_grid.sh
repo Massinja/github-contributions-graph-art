@@ -8,8 +8,10 @@ DAYS=5
 
 #default date to start making commits from
 START_DATE="2020-01-01"
-STYLE=fixed
+
 #fixed number of commits per day, or random, therefore, different shades of green on the github grid
+STYLE="fixed"
+
 #number of default commits per day
 NC=5
 
