@@ -1,5 +1,7 @@
-#!/bin/bash
-# Github contribution graph starts on Sundays, 7 squares high, ~50 squares wide;
+# VERSION 2.0
+# instead of consecutive days of commits, add code to make commits in the pattern of recognizable characters 
+
+# GitHub contribution graph starts on Sundays, 7 squares high, ~50 squares wide;
 # 5 shades of green - the colour is individual to user's activity level 
 
 # Plan:
