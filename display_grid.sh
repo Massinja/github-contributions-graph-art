@@ -30,21 +30,20 @@ print_usage() {
 #CMT - number of commits
 #WORK_DATE - the date to make commits on
 
-
-
-make_commit($CMT, $DAY, $WORK_DATE) {
-
+make_commit() {
+CMT=$1
+WORK_DATE=$2
 	Y=$(date -d $WORK_DATE +%Y)
 	M=$(date -d $WORK_DATE +%m)
 	D=$(date -d $WORK_DATE +%d)
 
 	for i in $(seq 1 $CMT)
 	do
-		echo "commit $DAY-$i for full grid" > commits
+		echo "commit $WORK_DATE-$i for full grid" > commits
 		export GIT_COMMITTER_DATE="$Y-$M-$D 12:0$i:00"
 		export GIT_AUTHOR_DATE="$Y-$M-$D 12:0$i:00"
 		git add commits
-		git commit --date="$Y-$M-$D 12:0$i:00" -m "add commit $DAY-$i to build full coverage github grid"
+		git commit --date="$Y-$M-$D 12:0$i:00" -m "add commit $WORK_DATE-$i to build full coverage github grid"
 	done
 }
 
@@ -99,7 +98,7 @@ do
 		CMT=$NC
 	fi
 
-	make_commit($CMT, $DAY, $WORK_DATE)
+	make_commit $CMT $WORK_DATE
 
    	WORK_DATE=$(date -d "$WORK_DATE +1 days" +%Y-%m-%d)
 
