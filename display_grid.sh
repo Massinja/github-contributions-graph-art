@@ -17,16 +17,6 @@ print_usage() {
 	-s style of the grid color\noptions:\nfixed - same colour for every square;\nrandom - in the range from 1 and number specified with flag "-n";\ndefault: 5'
 }
 
-while getopts 'd:n:s:c:h' flag; do
-	case "${flag}" in
-		d) START_DATE="${OPTARG}" ;;
-		c) NC="${OPTARG}" ;;
-		n) DAYS="${OPTARG}" ;;
-		s) STYLE="${OPTARG}" ;;
-		*) print_usage
-			exit 1 ;;
-	esac
-done
 
 
 
@@ -46,6 +36,43 @@ make_commit($CMT, $DAY, $WORK_DATE) {
 	done
 }
 
+while getopts 'd:n:s:c:h' flag; do
+	case "${flag}" in
+		d) START_DATE=$(date -d "$OPTARG" +%Y-%m-%d 2> /dev/null)
+		if [ $? -ne 0 ]; then 
+			echo "Check your date format. Try again, please!"
+			echo "Expected: YYYY-MM-DD. Received: $OPTARG"
+			exit 1 
+		fi
+		;;
+		c) NC="${OPTARG}"
+		if [ "$NC" -ge 1 2> /dev/null ] && [ "$NC" -le 59 2> /dev/null ]; then
+			continue
+		else
+			echo "Invalid number of commits! Try again, please!"
+			echo "Expected: a number from 1 to 59. Received: $OPTARG"
+			exit 1
+		fi
+		;;
+		n) DAYS="${OPTARG}"
+		if [ "$DAYS" -ge 1 2> /dev/null ] && [ "$DAYS" -le 366  2> /dev/null ]; then
+			continue
+		else
+			echo "Invalid number of days! Try again, please!"
+			echo "Expected: a number from 1 to 366. Received: $OPTARG"
+			exit 1
+		fi
+		;;
+		s) STYLE="${OPTARG}" 
+		if [ "$STYLE" != "random" ] && [ "$STYLE" != "fixed" ]; then 
+			echo "Expected: \"-s random\" or \"-s fixed\". Received: \"-s $OPTARG\"" 
+			exit 1
+		fi
+		;;
+		*) print_usage
+			exit 1 ;;
+	esac
+done
 WORK_DATE=$START_DATE
 
 for DAY in $(seq 1 $DAYS)
