@@ -8,9 +8,30 @@ START_DATE="2020-01-01"
 STYLE=fixed
 NC=5
 
-WORK_DATE=$START_DATE
-for DAY in $(seq 1 $DAYS)
-do
+print_usage() {
+	printf 'Usage: ./display_grid.sh -d "2020-01-01" -n 366 -s random -c 10
+	-h help;
+	-d specify date to start from in the format YYYY-MM-DD;\ndefault: "2020-01-01"
+	-c specify number of commits per day\nif used with flag "-s" random, specifies the max limit;\ndefault: 5
+	-n number of consecutive days to make commits for;\ndefault: 7
+	-s style of the grid color\noptions:\nfixed - same colour for every square;\nrandom - in the range from 1 and number specified with flag "-n";\ndefault: 5'
+}
+
+while getopts 'd:n:s:c:h' flag; do
+	case "${flag}" in
+		d) START_DATE="${OPTARG}" ;;
+		c) NC="${OPTARG}" ;;
+		n) DAYS="${OPTARG}" ;;
+		s) STYLE="${OPTARG}" ;;
+		*) print_usage
+			exit 1 ;;
+	esac
+done
+
+
+
+make_commit($CMT, $DAY, $WORK_DATE) {
+
 	Y=$(date -d $WORK_DATE +%Y)
 	M=$(date -d $WORK_DATE +%m)
 	D=$(date -d $WORK_DATE +%d)
