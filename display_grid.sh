@@ -23,6 +23,24 @@ do
 		git add commits
 		git commit --date="$Y-$M-$D 12:0$i:00" -m "add commit $DAY-$i to build full coverage github grid"
 	done
+}
+
+WORK_DATE=$START_DATE
+
+for DAY in $(seq 1 $DAYS)
+do
+
+	#number of commits(CM) on the same day is random or fixed
+	
+	if [ "$STYLE" == "random" ]; 
+	then 
+		CMT=$(( 1 + $RANDOM % $NC ))
+	else
+		CMT=$NC
+	fi
+
+	make_commit($CMT, $DAY, $WORK_DATE)
+
    	WORK_DATE=$(date -d "$WORK_DATE +1 days" +%Y-%m-%d)
 
 done
