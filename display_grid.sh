@@ -1,11 +1,8 @@
 #!/bin/bash
 
-#./display_grid.sh -d 2020-01-01 -dd 366 -s random -n 10
-#./display_grid.sh -d 2020-01-01 -dd 366 -s fixed -n 5
-
-#hardcoded for now for testing 
-PATRN=full
-FILE=display$PATRN
+#./display_grid.sh -d 2020-01-01 -n 366 -s random -c 10
+#./display_grid.sh -d 2020-01-01 -n 366 -s fixed -c 5
+ 
 DAYS=5
 START_DATE="2020-01-01"
 STYLE=random
