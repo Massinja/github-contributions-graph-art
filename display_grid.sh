@@ -84,6 +84,22 @@ while getopts 'd:n:s:c:h' flag; do
 			exit 1 ;;
 	esac
 done
+if [ "$STYLE" == "fixed" ];
+then
+	read -p "Would you like to make $NC commits per day from $START_DATE until $END_DATE? y/n: " response
+else
+	read -p "Would you like to make a random number of commits in the range from 1 to $NC from $START_DATE until $END_DATE? y/n: " response
+fi
+
+case "$response" in
+	[yY][eE][sS]|[yY])
+	echo "Excellent! Making commits shortly!"
+	;;
+	*)
+	echo "Bye then!"
+	exit 0
+	;;
+esac
 WORK_DATE=$START_DATE
 
 for DAY in $(seq 1 $DAYS)
