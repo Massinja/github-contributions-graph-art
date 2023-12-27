@@ -2,12 +2,18 @@
 
 #./display_grid.sh -d 2020-01-01 -n 366 -s random -c 10
 #./display_grid.sh -d 2020-01-01 -n 366 -s fixed -c 5
- 
+
+#number of consecutive days to make commits for
 DAYS=5
+
+#default date to start making commits from
 START_DATE="2020-01-01"
 STYLE=fixed
+#fixed number of commits per day, or random, therefore, different shades of green on the github grid
+#number of default commits per day
 NC=5
 
+# print to stdout how to use this script
 print_usage() {
 	printf 'Usage: ./display_grid.sh -d "2020-01-01" -n 366 -s random -c 10
 	-h help;
@@ -17,6 +23,10 @@ print_usage() {
 	-s style of the grid color\noptions:\nfixed - same colour for every square;\nrandom - in the range from 1 and number specified with flag "-n";\ndefault: 5'
 }
 
+#make N amount of commits on specified date
+#expects 2 parameters:
+#CMT - number of commits
+#WORK_DATE - the date to make commits on
 
 
 
