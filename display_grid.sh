@@ -19,10 +19,10 @@ NC=5
 print_usage() {
 	printf 'Usage: ./display_grid.sh -d "2020-01-01" -n 366 -s random -c 10
 	-h help;
-	-d specify date to start from in the format YYYY-MM-DD;\ndefault: "2020-01-01"
-	-c specify number of commits per day\nif used with flag "-s" random, specifies the max limit;\ndefault: 5
-	-n number of consecutive days to make commits for;\ndefault: 7
-	-s style of the grid color\noptions:\nfixed - same colour for every square;\nrandom - in the range from 1 and number specified with flag "-n";\ndefault: 5'
+	-d specify date to start from in the format YYYY-MM-DD;\n\t   default: "2020-01-01";
+	-c specify number of commits per day\n\t   if used with flag "-s random", will specify the max value of the range;\n\t   default: 5; maximum; 59;
+	-n number of consecutive days to make commits for; default: 5;
+	-s style of the grid colour\n\t   style options:\n\t   fixed - same colour for every square;\n\t   random - in the range from 1 and number specified with flag "-n";\n';
 }
 
 #make N amount of commits on specified date
