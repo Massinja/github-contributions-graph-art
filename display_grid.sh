@@ -84,6 +84,9 @@ while getopts 'd:n:s:c:h' flag; do
 			exit 1 ;;
 	esac
 done
+
+END_DATE=$(date -d "$START_DATE +$DAYS days" +%Y-%m-%d) 
+
 if [ "$STYLE" == "fixed" ];
 then
 	read -p "Would you like to make $NC commits per day from $START_DATE until $END_DATE? y/n: " response
