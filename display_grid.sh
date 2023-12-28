@@ -84,7 +84,7 @@ while getopts 'd:n:s:c:h' flag; do
 	esac
 done
 
-END_DATE=$(date -d "$START_DATE +$DAYS days" +%Y-%m-%d) 
+END_DATE=$(date -d "$START_DATE +$DAYS days -1 days" +%Y-%m-%d)
 
 # confirm user is okay to proceed
 if [ "$STYLE" == "fixed" ]; then
